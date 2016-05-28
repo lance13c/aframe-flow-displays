@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    app: ["./main.js"]
+    app: ["./src/index.js"]
   },
   output: {
     path: __dirname,
@@ -8,10 +8,10 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel'
-    }]
+    loaders: [
+      {test: /\.scss$/, loaders: ['style', 'css', 'sass']},
+      {test: '/\.js$/', exclude: /node_modules/, loader: 'babel'}
+    ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
