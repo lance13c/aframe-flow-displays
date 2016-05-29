@@ -1,10 +1,19 @@
+const webpack = require('webpack');
+const path = require('path');
+
+const PATHS = {
+	root: path.join(__dirname, './'),
+	app: path.join(__dirname, 'src/index.js'),
+  build: path.join(__dirname, 'build/')
+};
+
 module.exports = {
   entry: {
-    app: ["./src/index.js"]
+    app: [PATHS.app]
   },
   output: {
-    path: __dirname,
-    publicPath: '/',
+    path: PATHS.build,
+    publicPath: PATHS.build,
     filename: 'bundle.js'
   },
   module: {
@@ -18,6 +27,13 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './'
-  }
+	  hot: true,
+	  inline: true,
+	  progress: true,
+	  stats: 'errors-only',
+    contentBase: PATHS.root
+  },
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
+	]
 };

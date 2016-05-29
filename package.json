@@ -5,7 +5,8 @@
   "main": "main.js",
   "repository": "https://github.com/lance13c/aframe-flow-displays",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "build": "webpack",
+    "start": "npm run build && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
   "author": "",
   "license": "MIT",
