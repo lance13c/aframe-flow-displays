@@ -5,7 +5,7 @@
 	 */
 
 	const emittingEvent = 'trigger';
-
+//a
 		"use strict";
 		const clickListener = AFRAME.registerComponent('click-listener', {
 			init: function () {
