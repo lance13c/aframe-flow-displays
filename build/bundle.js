@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "10f489ec653723cd1f7a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6e2cf5f5b1507b4adfa0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -872,16 +872,16 @@
 			displayDepth: {default: .05},
 			placement: {default: 'right'},             // Left, Right. Above, Below
 			positionHeight: {default: '0 0 0'},
+			el: {default: {}},                         // This Element
 			color: {default: 0x00ff00},
 			radius: {default:  3},
 			layout: {default: {}} // Todo add internal display layout support later
 		},
 
 		init: function() {
-			this.el.addEventListener('mouseenter', () => {
-				console.log('Entered');
-				this.el.setAttribute('height', this.data.height + .1);
-			});
+
+			// Set current element
+			this.data.el = this.el;
 
 			// Set Children
 			this.data.childDisplays = []; // Clears the childDisplays
@@ -908,7 +908,17 @@
 			
 
 			// If Root -> Setup the Layout for All Displays
-			
+
+
+			// On Enter Event Listener
+			this.el.addEventListener('mouseenter', () => {
+				console.log('Entered');
+				// Toggle Visibility
+				this.data.childDisplays.forEach((display) => {
+					const visibility = display.el.getAttribute('visible');
+					display.el.setAttribute('visible', `${!visibility}`);
+				});
+			});
 		},
 
 		update: function () {
