@@ -4,29 +4,53 @@
     <meta charset="UTF-8">
     <title>Flow Display Demo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.2.0/aframe.js"></script>
-    <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
     <script src="https://cdn.rawgit.com/AltspaceVR/aframe-altspace-component/v0.2.0/dist/aframe-altspace-component.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
     <script src="./build/bundle.js"></script>
+
 </head>
 <body>
     <a-scene altspace>
         <a-assets>
-            <a-mixin id="display" geometry="depth: .05; height: 1; width: 2.5" material="shader: flat"
+            <a-mixin id="display" geometry="depth: .05; height: .5; width: .75" material="shader: flat"
                      pivot="0 0.5 0" position="0 0 0"></a-mixin>
-            <a-mixin id="unhinge" attribute="rotation" to="0 0 0" dur="1000" fill="both"></a-mixin>
         </a-assets>
 
-        <a-entity text="text: What's up; size: .2"
-                  color="#111"></a-entity>
+
+
+        <!--<a-entity text="text: What's up; size: .2"-->
+                  <!--color="#111"></a-entity>-->
 
         <!-- Series of nested boards that unfold one by one. -->
-        <a-entity id="entity-id" position="0 0 -4" scale="1 1 1" click-listener>
+        <a-entity id="entity-id" position="0 -.8 0" scale="1 1 1" click-listener>
             <!-- Animate rotation and position of group for extra visual flair. -->
-            <a-animation begin="trigger" attribute="position" to="0 5 -4" dur="2000"></a-animation>
+            <!--<a-animation attribute="position" begin="trigger" to="0 1 0" repeat="0"></a-animation>-->
+
+
 
             <!-- Pivot and position are used to set the "hinge" of each board to it's top edge. -->
             <a-box mixin="display" color="#F16745"></a-box>
+        </a-entity>
+
+        <a-entity flow-display="type: root" layout="type: circle; margin: 6; radius = 1">
+            <a-entity flow-display="placement: above"></a-entity>
+            <a-entity flow-display="placement: right">
+                <a-entity flow-display="placement: below"></a-entity>
+            </a-entity>
+            <a-entity flow-display="placement: below"></a-entity>
+            <a-entity flow-display="placement: below"></a-entity>
+            <a-entity flow-display="placement: below"></a-entity>
+            <a-entity flow-display="placement: below"></a-entity>
+            <a-entity flow-display="placement: below"></a-entity>
+            <a-entity flow-display="placement: below"></a-entity>
+        </a-entity>
+
+
+        <a-entity camera look-controls wasd-controls position="0 0 2">
+            <a-entity cursor="fuse: true; timeout: 500"
+                      position="0 0 -1"
+                      geometry="primitive: ring; radiusInner: .005; radiusOuter: .009"
+                      material="color: black; shader: flat">
+            </a-entity>
         </a-entity>
 
         <a-sky color="#42444A"></a-sky>
